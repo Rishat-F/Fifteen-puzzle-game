@@ -87,13 +87,8 @@ if __name__ == '__main__':
     # Colors in RGB:
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
-    RED = (255, 0, 0)
-    GREEN = (0, 255, 0)
     BLUE = (0, 0, 255)
     GREY1 = (195, 195, 195)
-    GREY2 = (88, 88, 88)
-    YELLOW1 = (255, 242, 0)
-    YELLOW2 = (255, 202, 24)
 
     # Fonts:
     font1 = pygame.font.SysFont('arial', 46, bold=True)
@@ -193,14 +188,9 @@ if __name__ == '__main__':
                     pygame.draw.rect(screen, GREY1, (EDGE_MARGIN + (SIZE_BLOCK + MARGIN)*j, UP_BLOCK +
                                                      (SIZE_BLOCK + MARGIN)*i, SIZE_BLOCK, SIZE_BLOCK))
                 else:
-                    if mas[i][j] == 11:
-                        screen.blit(d[mas[i][j]], (25 + (SIZE_BLOCK + MARGIN) * j, 161 + (SIZE_BLOCK + MARGIN) * i))
-                    elif mas[i][j] == 10:
-                        screen.blit(d[mas[i][j]], (23 + (SIZE_BLOCK + MARGIN) * j, 161 + (SIZE_BLOCK + MARGIN) * i))
-                    elif mas[i][j] // 10 == 0:
-                        screen.blit(d[mas[i][j]], (37 + (SIZE_BLOCK + MARGIN)*j, 161 + (SIZE_BLOCK + MARGIN)*i))
-                    else:
-                        screen.blit(d[mas[i][j]], (22 + (SIZE_BLOCK + MARGIN) * j, 161 + (SIZE_BLOCK + MARGIN) * i))
+                    text_rect = d[mas[i][j]].get_rect(center=(EDGE_MARGIN + (SIZE_BLOCK + MARGIN)*j + int(SIZE_BLOCK/2),
+                                                              UP_BLOCK + (SIZE_BLOCK + MARGIN)*i + int(SIZE_BLOCK/2)))
+                    screen.blit(d[mas[i][j]], text_rect)
         screen.blit(text_press, (39, 564)) # Designing passive game area
         screen.blit(text_space, (105, 560))
         screen.blit(text_to, (196, 564))
