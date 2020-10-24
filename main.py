@@ -57,17 +57,21 @@ def move(a, row_change, column_change):
             a[i][n], a[i + row_change][n + column_change] = a[i + row_change][n + column_change], a[i][n]
             return a
 
+
 # Moving block left to the empty space:
 def move_left(a):
     return move(a, row_change=0, column_change=1)
+
 
 # Moving block right to the empty space:
 def move_right(a):
     return move(a, row_change=0, column_change=-1)
 
+
 # Moving block up to the empty space:
 def move_up(a):
     return move(a, row_change=1, column_change=0)
+
 
 # Moving block down to the empty space:
 def move_down(a):
@@ -76,8 +80,6 @@ def move_down(a):
 
 if __name__ == '__main__':
     pygame.init()
-    img1 = pygame.image.load('image1.png')  # Logo to the window panel
-    img2 = pygame.image.load('image2.png')  # Image for passive game area design
     movement_sound = pygame.mixer.Sound('1.wav')  # Blocks moving sound
     shuffle_sound = pygame.mixer.Sound('2.wav')  # Shuffle sound
 
@@ -96,6 +98,8 @@ if __name__ == '__main__':
     font3 = pygame.font.SysFont('timesnewroman', 28)
 
     # Text to the passive game area design:
+    text_rules_1 = font3.render('Shuffle puzzle and assemble', 0, WHITE)
+    text_rules_2 = font3.render('numbers in the right order', 0, WHITE)
     text_press = font2.render('press', 0, WHITE)
     text_space = font3.render('Space', 0, WHITE)
     text_to = font2.render('to', 0, WHITE)
@@ -138,8 +142,7 @@ if __name__ == '__main__':
                             SIZE_BLOCK * BLOCKS + MARGIN * (BLOCKS - 1))
 
     screen = pygame.display.set_mode((WIDTH, HEIGH))
-    pygame.display.set_caption('')
-    pygame.display.set_icon(img1)
+    pygame.display.set_caption('15 PUZZLE')
 
     # Creating assembled "15 puzzle" array:
     mas = [
@@ -171,7 +174,6 @@ if __name__ == '__main__':
                 elif event.key == pygame.K_SPACE:
                     pygame.mixer.Sound.play(shuffle_sound)
                     mas = puzzle_shuffle()
-        screen.blit(img2, (-4, 0)) # Designing passive game area
         pygame.draw.rect(screen, WHITE, GAME_AREA) # Drawing game area on the screen that is broken into square blocks:
         for j in range(1, BLOCKS):
             x = EDGE_MARGIN + SIZE_BLOCK*j + MARGIN*(j - 1)
@@ -191,7 +193,9 @@ if __name__ == '__main__':
                     text_rect = d[mas[i][j]].get_rect(center=(EDGE_MARGIN + (SIZE_BLOCK + MARGIN)*j + int(SIZE_BLOCK/2),
                                                               UP_BLOCK + (SIZE_BLOCK + MARGIN)*i + int(SIZE_BLOCK/2)))
                     screen.blit(d[mas[i][j]], text_rect)
-        screen.blit(text_press, (39, 564)) # Designing passive game area
+        screen.blit(text_rules_1, (40, 30)) # Designing passive game area
+        screen.blit(text_rules_2, (53, 70))
+        screen.blit(text_press, (39, 564))
         screen.blit(text_space, (105, 560))
         screen.blit(text_to, (196, 564))
         screen.blit(text_shuffle, (236, 561))
