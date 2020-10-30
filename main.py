@@ -79,6 +79,7 @@ def move_down(a):
 
 
 if __name__ == '__main__':
+    pygame.mixer.pre_init(44100, -16, 1, 512)
     pygame.init()
     movement_sound = pygame.mixer.Sound('1.wav')  # Blocks moving sound
     shuffle_sound = pygame.mixer.Sound('2.wav')  # Shuffle sound
